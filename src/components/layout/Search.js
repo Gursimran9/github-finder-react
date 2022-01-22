@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = ({ search }) => {
+const Search = ({ search, clearUsers, showClear }) => {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
@@ -24,6 +24,15 @@ const Search = ({ search }) => {
           value='Search'
         />
       </form>
+      {showClear && (
+        <button
+          type='button'
+          className='btn btn-light btn-block'
+          onClick={ clearUsers}
+        >
+          Clear
+        </button>
+      )}
     </div>
   );
 };

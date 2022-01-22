@@ -17,11 +17,20 @@ const App = () => {
     setUsers(res.data.items);
     setLoading(false);
   };
+
+  const clearUsers = () => {
+    setUsers([]);
+    setLoading(false);
+  };
   return (
     <div className='App'>
       <Navbar title='Github Finder' />
       <div className='container'>
-        <Search search={search} />
+        <Search
+          search={search}
+          clearUsers={clearUsers}
+          showClear={users.length > 0 ? true : false}
+        />
         <Users loading={loading} users={users} />
       </div>
     </div>
