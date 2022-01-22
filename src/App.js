@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/layout/Search';
+import Alert from './components/layout/Alert';
 import axios from 'axios';
 import './App.css';
 
 const App = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState('');
 
   const search = async (text) => {
     setLoading(true);
@@ -22,14 +24,21 @@ const App = () => {
     setUsers([]);
     setLoading(false);
   };
+
+  const handleAlert = (msg, type) => {
+    setAlert({ msg, type });
+  };
+
   return (
     <div className='App'>
       <Navbar title='Github Finder' />
       <div className='container'>
+        <Alert alert={alert} />
         <Search
           search={search}
           clearUsers={clearUsers}
           showClear={users.length > 0 ? true : false}
+          handleAlert={handleAlert}
         />
         <Users loading={loading} users={users} />
       </div>

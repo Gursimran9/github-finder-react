@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 
-const Search = ({ search, clearUsers, showClear }) => {
+const Search = ({ search, clearUsers, showClear, handleAlert }) => {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    search(input);
-    setInput('');
+    if (input === '') {
+      handleAlert('Please Enter Something', 'Light');
+    } else {
+      search(input);
+      setInput('');
+    }
   };
   return (
     <div>
@@ -28,7 +32,7 @@ const Search = ({ search, clearUsers, showClear }) => {
         <button
           type='button'
           className='btn btn-light btn-block'
-          onClick={ clearUsers}
+          onClick={clearUsers}
         >
           Clear
         </button>
